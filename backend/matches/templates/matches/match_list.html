@@ -1,7 +1,7 @@
 <h1>Matches</h1>
 <ul>
   {% for match in object_list %}
-    <li>{{ article.name }}</li>
+    <li>{{ match.name }}</li>
   {% empty %}
     <li>No matches yet.</li>
   {% endfor %}
