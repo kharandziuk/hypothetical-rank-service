@@ -8,6 +8,33 @@ services:
     env_file:
       - .env
 
+  backend:
+    build: ./backend
+    volumes:
+      - ./backend/:/code/
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+    command: ./wait-for-it.sh db:5432 -- ./entrypoint.sh
+    environment:
+      - SQL_HOST=db
+    env_file:
+      - .env
+
+  worker:
+    build: ./backend
+    volumes:
+      - ./backend/:/code/
+    depends_on:
+      - backend
+    command: ./wait-for-it.sh db:5432 -- ./entrypoint-worker.sh
+    environment:
+      - SQL_HOST=db
+    env_file:
+      - .env
+
+
   rabbitmq:
     image: rabbitmq:3-management
     ports:
