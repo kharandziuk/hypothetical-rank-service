@@ -1,6 +1,15 @@
+version: "3.7"
 
-rabbitmq:
-  image: rabbitmq:3-management
-  ports:
-    - "127.0.0.1:5672:5672"
-    - "127.0.0.1:15672:15672"
+services:
+  db:
+    image: postgres:11-alpine
+    ports:
+      - 5432:5432
+    env_file:
+      - .env
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - 5672:5672
+      - 15672:15672
