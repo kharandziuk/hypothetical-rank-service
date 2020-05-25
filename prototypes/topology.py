@@ -1,5 +1,7 @@
 import pika
-connection = pika.BlockingConnection()
+parameters = pika.URLParameters(
+    f'amqp://guest:guest@localhost:5672/%2F')
+connection = pika.BlockingConnection(parameters)
 channel = connection.channel()
 queue = channel.queue_declare(queue='test')
 channel.exchange_declare(

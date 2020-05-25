@@ -16,9 +16,7 @@ services:
       - 8000:8000
     depends_on:
       - db
-    command: ./wait-for-it.sh db:5432 -- ./entrypoint.sh
-    environment:
-      - SQL_HOST=db
+    command: ./wait-for-it.sh rabbitmq:5672 -- ./wait-for-it.sh db:5432 -- ./entrypoint.sh
     env_file:
       - .env
 
@@ -28,12 +26,10 @@ services:
       - ./backend/:/code/
     depends_on:
       - backend
-    command: ./wait-for-it.sh db:5432 -- ./entrypoint-worker.sh
-    environment:
-      - SQL_HOST=db
+    command: ./wait-for-it.sh rabbitmq:5672 -- ./entrypoint-worker.sh
+    restart: on-failure
     env_file:
       - .env
-
 
   rabbitmq:
     image: rabbitmq:3-management

@@ -12,9 +12,12 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 from dotenv import load_dotenv
+from pathlib import Path
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+env_path = Path(BASE_DIR, '..', '.env').resolve()
+load_dotenv(dotenv_path=env_path, verbose=True)
 
 
 # Quick-start development settings - unsuitable for production
@@ -123,3 +126,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+AMQP_HOST = os.environ['AMQP_HOST']
+AMQP_PORT = os.environ.get('AMQP_PORT', '5672')
