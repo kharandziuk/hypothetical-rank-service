@@ -1,4 +1,4 @@
-<h1>Matches</h1>
+<h1>Matches {{ object_list | length }}</h1>
 <ul>
   {% for match in object_list %}
     <li>{{ match.name }}</li>

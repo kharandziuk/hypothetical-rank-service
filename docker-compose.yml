@@ -16,6 +16,7 @@ services:
       - 8000:8000
     depends_on:
       - db
+      - rabbitmq
     command: ./wait-for-it.sh rabbitmq:5672 -- ./wait-for-it.sh db:5432 -- ./entrypoint.sh
     env_file:
       - .env
