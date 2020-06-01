@@ -1,7 +1,7 @@
 <h1>Matches {{ object_list | length }}</h1>
 <ul>
   {% for match in object_list %}
-    <li>{{ match.name }}</li>
+  <li>{{match.tournament.name}} {{ match.datetime_start }}</li>
   {% empty %}
     <li>No matches yet.</li>
   {% endfor %}
