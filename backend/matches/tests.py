@@ -68,4 +68,3 @@ def test_can_filter_by_match(client):
     assert response.status_code == 200
     assert len(response.json()) == 1
     assert response.json()[0]['id'] == searched_match.id
-

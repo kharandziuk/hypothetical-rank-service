@@ -11,10 +11,20 @@ class MatchFilter(filters.FilterSet):
         field_name="title__name",
         lookup_expr='icontains'
     )
+    tournament = filters.CharFilter(
+        field_name="tournament__name",
+        lookup_expr='icontains'
+    )
+    datetime_start__gte = filters.DateTimeFilter(field_name='datetime_start', lookup_expr='gte')
+    datetime_start__lte = filters.DateTimeFilter(field_name='datetime_start', lookup_expr='lte')
 
     class Meta:
         model = models.Match
-        fields = ['title']
+        fields = [
+            'title', "tournament", "state",
+            'datetime_start__gte',
+            'datetime_start__lte'
+        ]
 
 
 class MatchViewSet(viewsets.ModelViewSet):
