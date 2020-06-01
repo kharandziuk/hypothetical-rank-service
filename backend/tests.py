@@ -19,10 +19,10 @@ def test_can_properly_handle_message_1():
         tournament = match.tournament
         assert tournament.name == "Overbayes Season 1"
         score1, score2 = match.scores.all()
-        assert score2.team.name == 'Bayes Esports Team 1'
-        assert score2.score == None
-        assert score1.team.name == 'Bayes Team 2'
-        assert score2.score == None
+        assert score1.team.name == 'Bayes Esports Team 1'
+        assert score1.score == None
+        assert score2.team.name == 'Bayes Team 2'
+        assert score1.score == None
 
 def test_can_handle_all_the_messages():
     for x in range(1, 5):

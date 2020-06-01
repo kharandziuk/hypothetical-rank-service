@@ -76,6 +76,7 @@ class Source(models.Model):
 
 class Match(models.Model):
     title = models.ForeignKey('matches.Title', on_delete=models.CASCADE, null=True)
+    # TODO: url field
     url = models.CharField(max_length=255)
     tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE, null=True)
     bestof = models.CharField(max_length=255, null=True)
@@ -97,7 +98,6 @@ class Title(models.Model):
 
 
 class Score(models.Model):
-    name = models.CharField(max_length=255)
     is_winner= models.BooleanField(null=True, blank=True)
     match = models.ForeignKey(
         'matches.Match',

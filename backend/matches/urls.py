@@ -5,5 +5,6 @@ from matches import views
 app_name = "matches"
 
 urlpatterns = [
-    path('', views.MatchListView.as_view(), name='matches-list'),
+    path('', views.MatchViewSet.as_view(dict(get='list', post='create')), name='list'),
+    path('<int:pk>', views.MatchViewSet.as_view(dict(get='retrieve')), name='detail'),
 ]
