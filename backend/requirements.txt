@@ -7,3 +7,4 @@ pytest-django
 djangorestframework
 factory-boy
 django-filter
+pre-commit
