@@ -6,14 +6,16 @@ import factory
 class TournamentFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = models.Tournament
+
     name = factory.Sequence(lambda n: f"tournament{n}")
 
 
 class TeamFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = models.Team
-    name = factory.Sequence(lambda n: f"score{n}")
-    source = factory.SubFactory('matches.factories.SourceFactory')
+
+    name = factory.Sequence(lambda n: f"team{n}")
+    source = factory.SubFactory("matches.factories.SourceFactory")
 
 
 class TitleFactory(factory.django.DjangoModelFactory):
@@ -54,6 +56,4 @@ class MatchFactory(factory.django.DjangoModelFactory):
             # Simple build, do nothing.
             return
         for _ in range(2):
-            ScoreFactory(
-                match=self
-            )
+            ScoreFactory(match=self)

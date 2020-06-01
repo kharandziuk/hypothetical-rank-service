@@ -1,5 +1,6 @@
 import pika
 
+
 def on_message(channel, method_frame, header_frame, body):
     print(method_frame.delivery_tag)
     print(body)
@@ -9,7 +10,7 @@ def on_message(channel, method_frame, header_frame, body):
 
 connection = pika.BlockingConnection()
 channel = connection.channel()
-channel.basic_consume('test', on_message)
+channel.basic_consume("test", on_message)
 try:
     channel.start_consuming()
 except KeyboardInterrupt:

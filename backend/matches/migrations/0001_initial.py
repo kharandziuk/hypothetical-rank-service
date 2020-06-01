@@ -8,77 +8,160 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Match',
+            name="Match",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('url', models.CharField(max_length=255)),
-                ('datetime_start', models.DateTimeField(null=True)),
-                ('bestof', models.CharField(max_length=255, null=True)),
-                ('state', models.IntegerField()),
-                ('external_id', models.CharField(max_length=255, unique=True)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("url", models.CharField(max_length=255)),
+                ("datetime_start", models.DateTimeField(null=True)),
+                ("bestof", models.CharField(max_length=255, null=True)),
+                ("state", models.IntegerField()),
+                ("external_id", models.CharField(max_length=255, unique=True)),
             ],
         ),
         migrations.CreateModel(
-            name='Source',
+            name="Source",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=255, unique=True)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=255, unique=True)),
             ],
         ),
         migrations.CreateModel(
-            name='Title',
+            name="Title",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=255, unique=True)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=255, unique=True)),
             ],
         ),
         migrations.CreateModel(
-            name='Tournament',
+            name="Tournament",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=255)),
-                ('external_id', models.CharField(max_length=255, null=True)),
-                ('source', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='matches.Source')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=255)),
+                ("external_id", models.CharField(max_length=255, null=True)),
+                (
+                    "source",
+                    models.ForeignKey(
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="matches.Source",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Team',
+            name="Team",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=255)),
-                ('external_id', models.CharField(max_length=255)),
-                ('source', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='matches.Source')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=255)),
+                ("external_id", models.CharField(max_length=255)),
+                (
+                    "source",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="matches.Source"
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Score',
+            name="Score",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=255)),
-                ('is_winner', models.BooleanField(blank=True, null=True)),
-                ('score', models.IntegerField(blank=True, null=True)),
-                ('match', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='scores', to='matches.Match')),
-                ('team', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='scores', to='matches.Team')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=255)),
+                ("is_winner", models.BooleanField(blank=True, null=True)),
+                ("score", models.IntegerField(blank=True, null=True)),
+                (
+                    "match",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="scores",
+                        to="matches.Match",
+                    ),
+                ),
+                (
+                    "team",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="scores",
+                        to="matches.Team",
+                    ),
+                ),
             ],
         ),
         migrations.AddField(
-            model_name='match',
-            name='source',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='matches.Source'),
+            model_name="match",
+            name="source",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to="matches.Source"
+            ),
         ),
         migrations.AddField(
-            model_name='match',
-            name='title',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='matches.Title'),
+            model_name="match",
+            name="title",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="matches.Title",
+            ),
         ),
         migrations.AddField(
-            model_name='match',
-            name='tournament',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='matches.Tournament'),
+            model_name="match",
+            name="tournament",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="matches.Tournament",
+            ),
         ),
     ]

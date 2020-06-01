@@ -6,12 +6,9 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('matches', '0001_initial'),
+        ("matches", "0001_initial"),
     ]
 
     operations = [
-        migrations.RemoveField(
-            model_name='score',
-            name='name',
-        ),
+        migrations.RemoveField(model_name="score", name="name",),
     ]
