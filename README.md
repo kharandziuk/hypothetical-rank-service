@@ -4,9 +4,9 @@ dependencies: you should have Docker installed(I use Docker version 19.03.8)
 - http://localhost:15672/#/queues/%2F/test - RabbitMQ management tool(guest:guest)
 - http://localhost:8000/matches - api list view
 - http://localhost:8000/matches/1 - api list view
-- if the queue grows feel free to scale number of workes with `docker-compose scale worker=4`(NB: the actual performance depends on the machine)
+- if the queue grows(I hope it should:)) feel free to scale number of workes with `docker-compose scale worker=4`(NB: the actual performance depends on the machine)
 
-## Design desicions
+## Design decisions
 - I made some desicions to make this project interesting for me. In real life everything is discussable.
 - The solution tries to follow 'shared nothing' approach
 - There are 3 "application" services: backend, worker(consumer) and producer. And two "backing" services: postgres and rabbitmq.
@@ -18,6 +18,9 @@ dependencies: you should have Docker installed(I use Docker version 19.03.8)
 - Worker intentionally doens't handle the possible errors. The idea was to build a service which follow twelve-factor application approach
 - In a case of exception it should be printed to [stdout](https://12factor.net/logs), the worker will fail and superviser(in this particular case it's docker-compose with `restart` clause) will restart it. you can observe this behaviour when the worker starts before the actuall exchange created.
 - I use django-filter to create filters
+
+## Deployment
+Let's deploy it to AWS EKS and use RDS for the database. I have nice experience with CloudAMQP, let's use it.
 
 ## Notes about "Merging events"
 In real life I will ask questions beforehand instead of making assumptions or guessing. But for a study project I belive it's ok to make assumptions. So, my assumptions are bellow
