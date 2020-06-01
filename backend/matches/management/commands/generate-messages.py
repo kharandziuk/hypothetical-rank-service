@@ -36,6 +36,6 @@ class Command(BaseCommand):
                     msg,
                     pika.BasicProperties(content_type="text/plain", delivery_mode=1),
                 )
-                sleep(0.01)
+                sleep(0.03)
         except KeyboardInterrupt:
             connection.close()

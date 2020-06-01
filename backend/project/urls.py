@@ -20,7 +20,7 @@ from django.views.generic.base import RedirectView
 urlpatterns = [
     path(
         "",
-        RedirectView.as_view(pattern_name="matches:matches-list", permanent=False),
+        RedirectView.as_view(pattern_name="matches:list", permanent=False),
         name="index",
     ),
     path("matches/", include("matches.urls", namespace="matches"),),

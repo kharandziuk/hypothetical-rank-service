@@ -32,6 +32,17 @@ services:
     env_file:
       - .env
 
+  producer:
+    build: ./backend
+    volumes:
+      - ./backend/:/code/
+    depends_on:
+      - backend
+    command: ./wait-for-it.sh localhost:8000/matches -- ./entrypoint-producer.sh
+    restart: on-failure
+    env_file:
+      - .env
+
   rabbitmq:
     image: rabbitmq:3-management
     ports:
