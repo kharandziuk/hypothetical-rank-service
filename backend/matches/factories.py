@@ -16,6 +16,13 @@ class TeamFactory(factory.django.DjangoModelFactory):
     source = factory.SubFactory('matches.factories.SourceFactory')
 
 
+class TitleFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = models.Title
+
+    name = factory.Sequence(lambda n: f"title{n}")
+
+
 class ScoreFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = models.Score
@@ -35,10 +42,11 @@ class MatchFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = models.Match
 
-    url = factory.Sequence(lambda n: f"url{n}")
     tournament = factory.SubFactory(TournamentFactory)
     state = 1
     source = factory.SubFactory(SourceFactory)
+    title = factory.SubFactory(TitleFactory)
+    external_id = factory.Sequence(lambda n: f"ext_id{n}")
 
     @factory.post_generation
     def scores(self, create, extracted, **kwargs):

@@ -11,4 +11,5 @@ class MatchSerializer(serializers.ModelSerializer):
         model = models.Match
         fields = (
             'id',
+            'scores'
         )
